@@ -26,6 +26,30 @@ import com.winenote.core.designsystem.theme.WineTheme
 import com.winenote.core.resource.R
 
 @Composable
+fun WineDialog(
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = true,
+    usePlatformDefaultWidth: Boolean = true,
+    decorFitsSystemWindows: Boolean = true,
+    onDismiss: () -> Unit = {},
+    content: @Composable () -> Unit,
+) {
+    Dialog(
+        properties = DialogProperties(
+            dismissOnBackPress = dismissOnBackPress,
+            dismissOnClickOutside = dismissOnClickOutside,
+            usePlatformDefaultWidth = usePlatformDefaultWidth,
+            decorFitsSystemWindows = decorFitsSystemWindows
+        ),
+        onDismissRequest = onDismiss,
+        content = {
+            WineNoteTheme {
+                content()
+            }
+        }
+    )
+}
+@Composable
 fun WineAlertDialog(
     title: String = "",
     description: String = "",

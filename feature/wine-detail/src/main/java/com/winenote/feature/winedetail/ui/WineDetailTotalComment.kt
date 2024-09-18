@@ -1,30 +1,22 @@
 package com.winenote.feature.winedetail.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.gowtham.ratingbar.RatingBar
 import com.gowtham.ratingbar.RatingBarConfig
 import com.gowtham.ratingbar.StepSize
 import com.winenote.core.designsystem.ThemePreviews
-import com.winenote.core.designsystem.theme.Gray
 import com.winenote.core.designsystem.theme.Gray20
 import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.designsystem.theme.WineTheme
@@ -81,26 +73,6 @@ fun WineDetailTotalComment(
                 style = WineTheme.typography.regular12,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-        }
-
-        if (wineRecord.photoUrl != null) {
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Card(
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.background),
-                shape = MaterialTheme.shapes.small,
-                colors = CardDefaults.cardColors(containerColor = Gray)
-            ) {
-                AsyncImage(
-                    modifier = Modifier,
-                    model = ImageRequest
-                        .Builder(LocalContext.current)
-                        .data(wineRecord.photoUrl)
-                        .build(),
-                    contentDescription = "record image",
-                    contentScale = ContentScale.Crop
-                )
-            }
         }
     }
 }

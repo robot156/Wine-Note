@@ -23,7 +23,7 @@ internal class WineRecordRemoteDataSourceImpl @Inject constructor(
                 }
             }
         } catch (exception: Exception) {
-            Timber.e("exception ${exception.message} ")
+            Timber.e("[imageUpload] ${exception.message} ")
             throw Exception("image upload fail exception!")
         }
     }

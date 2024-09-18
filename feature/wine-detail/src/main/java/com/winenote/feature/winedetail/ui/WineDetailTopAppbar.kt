@@ -23,6 +23,16 @@ fun WineDetailTopAppbar(
         title = stringResource(id = R.string.detail_title),
         actions = {
             IconButton(
+                onClick = { onUiAction(WineDetailUiAction.OnClickShareRecord(true)) }
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_share),
+                    contentDescription = "",
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            IconButton(
                 onClick = { onUiAction(WineDetailUiAction.OnShowEditDialog(true)) }
             ) {
                 Icon(

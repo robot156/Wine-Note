@@ -1,5 +1,6 @@
 package com.winenote.feature.winedetail
 
+import android.graphics.Bitmap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.winenote.core.domain.Result
@@ -20,6 +21,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -61,17 +63,22 @@ internal class WineDetailViewModel @Inject constructor(
             is WineDetailUiAction.OnClickBack -> setUiEvent(WineDetailEvent.NavigateToBack)
             is WineDetailUiAction.OnClickUpdateRecord -> setWineRecord()
             is WineDetailUiAction.OnClickDeleteRecord -> deleteWineRecord()
+            is WineDetailUiAction.OnClickShareRecord -> setWineRecordShare(uiAction.isShare)
+            is WineDetailUiAction.OnShareRecord -> navigateToShareRecord(uiAction.bitmap)
             is WineDetailUiAction.OnShowEditDialog -> showEditDialog(uiAction.isShow)
+            is WineDetailUiAction.OnShowPhotoDialog -> showPhotoDialog(uiAction.isShow)
         }
     }
 
     private fun setWineRecord() {
-        wineDetailUiState.checkState<WineDetailUiState.WineDetail> {
-            if (record.isDelete) {
-                updateWineRecordUseCase(UpdateWineRecordUseCase.Params(record.copy(deletedAt = null, isDelete = false).asEntity()))
-                setUiEvent(WineDetailEvent.NavigateToBack)
-            } else {
-                setUiEvent(WineDetailEvent.NavigateToWineWrite(record.id))
+        viewModelScope.launch {
+            wineDetailUiState.checkState<WineDetailUiState.WineDetail> {
+                if (record.isDelete) {
+                    updateWineRecordUseCase(UpdateWineRecordUseCase.Params(record.copy(deletedAt = null, isDelete = false).asEntity())).first()
+                    setUiEvent(WineDetailEvent.NavigateToBack)
+                } else {
+                    setUiEvent(WineDetailEvent.NavigateToWineWrite(record.id))
+                }
             }
         }
     }
@@ -90,9 +97,26 @@ internal class WineDetailViewModel @Inject constructor(
         }
     }
 
+    private fun setWineRecordShare(isShare: Boolean) {
+        wineDetailUiState.checkState<WineDetailUiState.WineDetail> {
+            _wineDetailUiState.update { copy(isShared = isShare) }
+        }
+    }
+
+    private fun navigateToShareRecord(bitmap: Bitmap) {
+        setWineRecordShare(false)
+        setUiEvent(WineDetailEvent.NavigateToShareRecord(bitmap))
+    }
+
     private fun showEditDialog(isShow: Boolean) {
         wineDetailUiState.checkState<WineDetailUiState.WineDetail> {
             _wineDetailUiState.update { copy(isShowEditDialog = isShow) }
+        }
+    }
+
+    private fun showPhotoDialog(isShow: Boolean) {
+        wineDetailUiState.checkState<WineDetailUiState.WineDetail> {
+            _wineDetailUiState.update { copy(isShowPhotoDialog = isShow) }
         }
     }
 }
@@ -100,7 +124,9 @@ internal class WineDetailViewModel @Inject constructor(
 sealed interface WineDetailUiState : UiState {
     data class WineDetail(
         val record: WineRecord,
-        val isShowEditDialog: Boolean = false
+        val isShowEditDialog: Boolean = false,
+        val isShowPhotoDialog: Boolean = false,
+        val isShared: Boolean = false
     ) : WineDetailUiState
 
     data object None : WineDetailUiState
@@ -110,10 +136,14 @@ sealed interface WineDetailUiAction : UiAction {
     data object OnClickBack : WineDetailUiAction
     data object OnClickDeleteRecord : WineDetailUiAction
     data object OnClickUpdateRecord : WineDetailUiAction
+    data class OnClickShareRecord(val isShare: Boolean) : WineDetailUiAction
     data class OnShowEditDialog(val isShow: Boolean) : WineDetailUiAction
+    data class OnShowPhotoDialog(val isShow: Boolean) : WineDetailUiAction
+    data class OnShareRecord(val bitmap: Bitmap) : WineDetailUiAction
 }
 
 sealed interface WineDetailEvent : UiEvent {
     data object NavigateToBack : WineDetailEvent
     data class NavigateToWineWrite(val recordId: String) : WineDetailEvent
+    data class NavigateToShareRecord(val bitmap: Bitmap) : WineDetailEvent
 }
