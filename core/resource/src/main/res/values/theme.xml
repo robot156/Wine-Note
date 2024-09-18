@@ -1,0 +1,17 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.WineNote" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Splash Screen -->
+    <style name="Theme.WineNote.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/color_splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@color/color_splash_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.WineNote</item>
+        <item name="android:statusBarColor">@color/color_splash_background</item>
+        <item name="android:navigationBarColor">@color/color_splash_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

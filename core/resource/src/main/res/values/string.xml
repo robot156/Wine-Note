@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wine Note</string>
+
+    <!-- region common -->
+    <string name="common_confirm">확인</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_next">다음</string>
+    <string name="common_prev">이전</string>
+    <string name="common_save">저장</string>
+    <string name="common_edit">편집</string>
+    <string name="common_delete">삭제</string>
+    <string name="common_restore">복원</string>
+    <!-- endregion common -->
+
+    <!-- region  Main -->
+    <string name="main_title">WINE</string>
+    <string name="main_sub_title">TASTING NOTE</string>
+    <string name="main_empty_wine">기억하고 싶은 와인이 있나요?\n와인 노트에 기록해보세요 :)</string>
+    <!-- endregion  Main -->
+
+    <!-- region Write -->
+    <string name="write_info_title">와인 정보를 알려주세요</string>
+    <string name="write_info_sub_title">*기억나지 않는 부분은 빈 칸으로 두셔도 됩니다</string>
+    <string name="write_tasting_date">테이스팅 날짜</string>
+    <string name="write_wine_name">와인명</string>
+    <string name="write_wine_name_hint">와인 이름을 작성해주세요</string>
+    <string name="write_region">생산 지역</string>
+    <string name="write_region_hint">와인 생산 지역을 작성해주세요</string>
+    <string name="write_alcohol">도수</string>
+    <string name="write_alcohol_option">(단위: %)</string>
+    <string name="write_alcohol_hint">ex) 14.1</string>
+    <string name="write_grape_variety">포도 품종</string>
+    <string name="write_grape_variety_hint">포도 품종을 작성해주세요</string>
+
+    <string name="write_color_and_scent_title">와인의 색과 향을 알려주세요</string>
+    <string name="write_color">색상</string>
+    <string name="write_color_sparkling">스파클링</string>
+    <string name="write_color_white">화이트</string>
+    <string name="write_color_rose">로제</string>
+    <string name="write_color_red">레드</string>
+    <string name="write_color_dessert">디저트</string>
+    <string name="write_scent">향의 세기</string>
+
+    <string name="write_scent_feel">느껴지는 향</string>
+    <string name="write_scent_feel_hint">ex) 열대 과일 향, 꽃 향, 훈연 향</string>
+    <string name="write_taste_title">맛을 평가해주세요</string>
+    <string name="write_body">바디</string>
+    <string name="write_tannin">타닌</string>
+    <string name="write_sugar_content">당도</string>
+    <string name="write_acidity">산도</string>
+
+    <string name="write_weak">약한</string>
+    <string name="write_strong">강한</string>
+    <string name="write_light">가벼운</string>
+    <string name="write_heavy">무거운</string>
+    <string name="write_little">적은</string>
+    <string name="write_many">많은</string>
+    <string name="write_low">낮은</string>
+    <string name="write_high">높은</string>
+
+    <string name="write_total_title">종합 평을 알려주세요</string>
+    <string name="write_photo">사진</string>
+    <string name="write_photo_option">(와인 사진 또는 시음 사진을 올려보세요)</string>
+    <string name="write_total_comment">총평</string>
+    <string name="write_total_comment_hint">200자 내외로 느낀 점을 작성해보세요</string>
+    <string name="write_score">평점</string>
+
+    <string name="write_error_message">이미지 업로드에 실패했어요.\n 잠시 후 다시 시도해주세요</string>
+    <!-- endregion Write -->
+
+    <!-- region Detail -->
+    <string name="detail_title">상세</string>
+    <string name="detail_info">기본 정보</string>
+    <string name="detail_name">이름</string>
+    <string name="detail_region">지역</string>
+    <string name="detail_grape_variety">품종</string>
+    <string name="detail_alcohol">도수</string>
+    <string name="detail_date">시음일</string>
+    <string name="detail_scent">향 세기 : %s</string>
+    <string name="detail_scent_feel">느껴진 향</string>
+    <string name="detail_taste">맛</string>
+    <string name="detail_total">총평</string>
+    <string name="detail_photo">사진</string>
+
+    <string name="detail_edit_title">기록 편집</string>
+    <string name="detail_edit_description">편집을 통해 날짜/내용을 수정할 수 있어요\n기록을 삭제하시면 휴지통으로 이동해요</string>
+    <string name="detail_delete_title">기록 삭제</string>
+    <string name="detail_delete_description">복원을 누르시면 기록 목록으로 이동해요\n삭제를 누르시면 기록이 완전히 삭제 됩니다</string>
+    <!-- endregion Detail -->
+
+    <!-- region setting -->
+    <string name="setting_title">설정</string>
+    <string name="setting_bin">휴지통</string>
+    <string name="setting_version">앱 버전</string>
+    <string name="setting_version_value">ver.%s</string>
+    <string name="setting_clear">모든 기록 지우기</string>
+    <string name="setting_clear_description">현재까지 작성한 모두 기록을 제거합니다.</string>
+    <string name="setting_clear_success">모든 와인 기록을 삭제하였습니다.</string>
+    <!-- endregion setting -->
+
+    <!-- region bin -->
+    <string name="bin_title">휴지통</string>
+    <string name="bin_description">*휴지통에 있는 기록은 15일 뒤 자동으로 삭제됩니다</string>
+    <string name="bin_empty_wine">휴지통이 깨끗해요 :D</string>
+    <string name="bin_clear_title">휴지통 비우기</string>
+    <string name="bin_clear_description">확인을 누르시면 휴지통에 있는 모든 기록을 지웁니다.</string>
+    <string name="bin_clear_success">휴지통을 모두 비웠습니다.</string>
+    <!-- endregion bin -->
+
+    <!-- region Unit -->
+    <string name="regex_date">yyyy.MM.dd</string>
+    <string name="regex_date_short">yy.MM.dd</string>
+    <string name="regex_date_year_and_month">yy.MM</string>
+    <string name="regex_date_day">dd</string>
+    <string name="unit_dash">-</string>
+    <string name="unit_day">D-%d</string>
+    <!-- endregion Unit -->
+
+    <!-- region comment -->
+    <string-array name="score_comment">
+        <item>0점 (끔찍해요)</item>
+        <item>0.5점 (맛 없어요)</item>
+        <item>1.0점 (별로예요)</item>
+        <item>1.5점 (부족해요)</item>
+        <item>2.0점 (아쉬워요)</item>
+        <item>2.5점 (조금 아쉬워요)</item>
+        <item>3.0점 (보통이에요)</item>
+        <item>3.5점 (괜찮아요)</item>
+        <item>4.0점 (너무 좋아요)</item>
+        <item>4.5점 (만족스러워요)</item>
+        <item>5.0점 (최고예요)</item>
+    </string-array>
+
+    <string-array name="scant_comment">
+        <item>약함</item>
+        <item>조금 약함</item>
+        <item>보통</item>
+        <item>조금 강함</item>
+        <item>강함</item>
+    </string-array>
+    <!-- endregion comment -->
+</resources>

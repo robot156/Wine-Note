@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204254216828",
+    "project_id": "winenote-e6b04",
+    "storage_bucket": "winenote-e6b04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204254216828:android:97584f62270d9d5ed27ff9",
+        "android_client_info": {
+          "package_name": "com.winenote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIGMCnMSlttUaJV5JyozBZViCWPJf9V1g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

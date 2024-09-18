@@ -1,0 +1,176 @@
+[versions]
+# Project
+androidGradlePlugin = "8.5.2"
+
+playservicesGradlePlugin = "4.4.2"
+firebaseCrashlyticsGradlePlugin = "3.0.2"
+
+# AndroidX
+androidxCore = "1.13.1"
+androidxComposeBom = "2024.09.01"
+androidxStartUp = "1.1.1"
+androidxLifecycle = "2.8.5"
+androidxHilt = "1.2.0"
+androidxComposeCompiler = "1.5.15"
+androidxCoreSplashScreen = "1.0.1"
+androidxActivity = "1.9.2"
+androidxNavigation = "2.8.0"
+androidxDataStore = "1.1.1"
+androidxRoom = "2.6.1"
+androidxAppcompat = "1.7.0"
+androidxPaging = "3.3.2"
+
+# Kotlin
+kotlin = "2.0.0"
+kotlinxCoroutines = "1.8.1"
+kotlinxCollectionsImmutable = "0.3.7"
+ksp = "2.0.0-1.0.21"
+
+# Firebase
+firebaseBom = "33.3.0"
+
+# hilt
+hilt = "2.51.1"
+
+# Coil
+coil = "2.6.0"
+
+# coreDseugar
+androidDesugarJdkLibs = "2.1.2"
+
+# Test
+junit = "4.13.2"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
+
+# ETC
+moshi = "1.15.1"
+lottie = "6.1.0"
+timber = "5.0.1"
+leakCanary = "2.9.1"
+compressor = "3.0.1"
+composeStableMarker = "1.0.5"
+composeRatingbar = "1.2.3"
+
+[libraries]
+# AndroidX
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-startup = { group = "androidx.startup", name = "startup-runtime", version.ref = "androidxStartUp" }
+androidx-dataStore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidxDataStore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppcompat" }
+androidx-core-splashScreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashScreen" }
+
+# AndroidX Compose
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
+
+# AndroidX Activity Compose
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+
+# AndroidX Lifecycle
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-savedState = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-savedstate", version.ref = "androidxLifecycle" }
+
+# AndroidX Room
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+androidx-room-coroutine = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
+androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidxRoom" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" } # For Kotlin use Ksp instead of annotationProcessor
+
+# Androidx Paging
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "androidxPaging" }
+androidx-paging-common = { group = "androidx.paging", name = "paging-common-ktx", version.ref = "androidxPaging" }
+
+# Androidx Paging Compose
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPaging" }
+
+# AndroidX Navigation
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
+
+# AndroidX Hilt
+androidx-hilt-common = { group = "androidx.hilt", name = "hilt-common", version.ref = "androidxHilt" }
+androidx-hilt-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "androidxHilt" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHilt" }
+
+# Hilt
+hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+
+# Android Test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
+# Android ETC
+android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" } # coreLibraryDesugaring
+
+# kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" } # For platform
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+
+# Coil
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil"}
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil"}
+coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil"}
+
+# ETC
+moshi-adapter = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
+moshi-core = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" } # For Kotlin use Ksp instead of annotationProcessor
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "composeStableMarker" }
+compose-ratingbar = { module = "io.github.a914-gowtham:compose-ratingbar", version.ref = "composeRatingbar" }
+leakCanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanary" }
+compressor = { group = "id.zelory", name = "compressor", version.ref = "compressor" }
+
+# Dependencies of the included build-logic
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+
+[bundles]
+androidx-room = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-room-paging"]
+androidx-lifecycle = ["androidx-lifecycle-runtime-compose", "androidx-lifecycle-viewModel-compose", "androidx-lifecycle-savedState"]
+coil = ["coil-kt", "coil-kt-compose", "coil-kt-svg"]
+
+[plugins]
+# Android Plugin
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+
+# Kotlin Plugin
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+# ETC Plugin
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+playServices = { id = "com.google.gms.google-services", version.ref = "playservicesGradlePlugin" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradlePlugin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+# Plugins defined by this project
+winenote-android-application = { id = "winenote.android.application", version = "unspecified" }
+winenote-android-application-compose = { id = "winenote.android.application.compose", version = "unspecified" }
+winenote-android-library = { id = "winenote.android.library", version = "unspecified" }
+winenote-android-library-compose = { id = "winenote.android.library.compose", version = "unspecified" }
+winenote-android-feature = { id = "winenote.android.feature", version = "unspecified" }
+winenote-android-hilt = { id = "winenote.android.hilt", version = "unspecified" }
+winenote-jvm-library = { id = "winenote.jvm.library", version = "unspecified" }
+winenote-jvm-hilt = { id = "winenote.jvm.hilt", version = "unspecified" }
