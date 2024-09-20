@@ -89,7 +89,7 @@ internal class WineDetailViewModel @Inject constructor(
                 if (record.isDelete) {
                     deleteWineRecordUseCase(DeleteWineRecordUseCase.Params(record.id))
                 } else {
-                    updateWineRecordUseCase(UpdateWineRecordUseCase.Params(record.copy(deletedAt = getZonedDateTimeWithSyncZero().plusDays(16).toString(), isDelete = true).asEntity()))
+                    updateWineRecordUseCase(UpdateWineRecordUseCase.Params(record.copy(deletedAt = getZonedDateTimeWithSyncZero().plusDays(15).toString(), isDelete = true).asEntity()))
                 }.collect {
                     setUiEvent(WineDetailEvent.NavigateToBack)
                 }

@@ -3,6 +3,7 @@ package com.winenote.feature.winebin
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import androidx.paging.filter
 import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.winenote.core.domain.usecase.record.ClearBinWineRecordsUseCase
@@ -17,12 +18,12 @@ import com.winenote.core.ui.state.UiState
 import com.winenote.core.ui.state.checkState
 import com.winenote.core.ui.util.getDateTimeBetweenDay
 import com.winenote.core.ui.util.getStringFormatZonedDateTime
+import com.winenote.core.ui.util.getZonedDateTimeWithSyncZero
 import com.winenote.feature.winebin.model.WineBinUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -41,20 +42,19 @@ internal class WineBinViewModel @Inject constructor(
 
     val wineRecords = getWineRecordsUseCase(GetWineRecordsUseCase.Params(isDelete = true))
         .mapLatest { pagingData ->
-            pagingData.map { entity ->
-                if (getStringFormatZonedDateTime(entity.deletedAt).isAfter(ZonedDateTime.now()).not()) {
-                    deletedBinWineRecord(recordId = entity.id)
-                }
-
+            pagingData.filter {
+                (getStringFormatZonedDateTime(it.deletedAt).isAfter(ZonedDateTime.now()))
+                    .also { isNotDeleteItem -> if (isNotDeleteItem.not()) deletedBinWineRecord(recordId = it.id) }
+            }.map { entity ->
                 val deleteDay = getDateTimeBetweenDay(
-                    startDate = ZonedDateTime.now(),
+                    startDate = getZonedDateTimeWithSyncZero(),
                     endDate = getStringFormatZonedDateTime(entity.deletedAt)
                 )
 
                 WineBinUiModel.WineRecordItem(entity.asItem(), deleteDay)
             }
         }
-        .map { pagingData ->
+        .mapLatest { pagingData ->
             pagingData.insertSeparators { before: WineBinUiModel?, after: WineBinUiModel? ->
                 if (before == null && after == null) {
                     setVisibleClearBinButton(false)

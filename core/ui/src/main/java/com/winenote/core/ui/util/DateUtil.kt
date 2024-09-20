@@ -26,7 +26,7 @@ fun getLongFormatZonedDateTime(epochMilli: Long): ZonedDateTime {
 }
 
 fun getZonedDateTimeWithSyncZero(zonedDateTime: ZonedDateTime = ZonedDateTime.now()): ZonedDateTime {
-    return zonedDateTime.withHour(0).withSecond(0).withNano(0)
+    return zonedDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0)
 }
 
 fun getDateTimeBetweenDay(startDate: ZonedDateTime? = null, endDate: ZonedDateTime? = null): Int {
@@ -39,6 +39,9 @@ fun isSameMonth(date: String?, otherDay: String?): Boolean {
     return if (otherDay == null) {
         true
     } else {
-        (ZonedDateTime.parse(date).month.value == ZonedDateTime.parse(otherDay).month.value)
+        val startDate =  ZonedDateTime.parse(date)
+        val otherDate = ZonedDateTime.parse(otherDay)
+
+        (startDate.year == otherDate.year && startDate.month == otherDate.month)
     }
 }
