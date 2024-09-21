@@ -5,7 +5,11 @@ import com.winenote.core.data.datasource.record.local.WineRecordLocalDataSource
 import com.winenote.core.data.datasource.record.local.WineRecordLocalDataSourceImpl
 import com.winenote.core.data.datasource.record.remote.WineRecordRemoteDataSource
 import com.winenote.core.data.datasource.record.remote.WineRecordRemoteDataSourceImpl
+import com.winenote.core.data.datasource.setting.SettingRepositoryImpl
+import com.winenote.core.data.datasource.setting.local.SettingLocalDataSource
+import com.winenote.core.data.datasource.setting.local.SettingLocalDataSourceImpl
 import com.winenote.core.domain.usecase.record.WineRecordRepository
+import com.winenote.core.domain.usecase.setting.SettingRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,4 +32,14 @@ internal abstract class DataModule {
     @Singleton
     @Binds
     abstract fun bindWineRecordRemoteDataSource(wineRecordRemoteDataSourceImpl: WineRecordRemoteDataSourceImpl): WineRecordRemoteDataSource
+
+    // ====================== Setting ======================
+    @Singleton
+    @Binds
+    abstract fun bindSettingRepository(settingRepositoryImpl: SettingRepositoryImpl): SettingRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindSettingLocalDataSource(settingLocalDataSourceImpl: SettingLocalDataSourceImpl): SettingLocalDataSource
+
 }

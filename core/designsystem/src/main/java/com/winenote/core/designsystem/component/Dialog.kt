@@ -43,12 +43,15 @@ fun WineDialog(
         ),
         onDismissRequest = onDismiss,
         content = {
-            WineNoteTheme {
+            WineNoteTheme(
+                darkTheme = WineTheme.isSystemInDarkTheme
+            ) {
                 content()
             }
         }
     )
 }
+
 @Composable
 fun WineAlertDialog(
     title: String = "",
@@ -65,7 +68,9 @@ fun WineAlertDialog(
         onDismissRequest = onDismiss,
         properties = DialogProperties(dismissOnBackPress = cancelable, dismissOnClickOutside = cancelable),
         content = {
-            WineNoteTheme {
+            WineNoteTheme(
+                darkTheme = WineTheme.isSystemInDarkTheme
+            ) {
                 Column(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.background, RoundedCornerShape(8.dp))

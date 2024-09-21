@@ -1,13 +1,11 @@
 package com.winenote.feature.winewrite.ui
 
 import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -36,7 +34,7 @@ fun DatePickerDialog(
             ) {
                 Text(
                     text = stringResource(id = R.string.common_confirm),
-                    style = WineTheme.typography.regular16,
+                    style = WineTheme.typography.bold16,
                     color = MaterialTheme.colorScheme.surface
                 )
             }
@@ -51,7 +49,9 @@ fun DatePickerDialog(
             }
         }
     ) {
-        WineNoteTheme {
+        WineNoteTheme(
+            darkTheme = WineTheme.isSystemInDarkTheme
+        ) {
             DatePicker(
                 state = datePickerState,
                 colors = DatePickerDefaults.colors().copy(

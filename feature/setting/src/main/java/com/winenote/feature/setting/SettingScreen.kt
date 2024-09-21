@@ -24,14 +24,17 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.winenote.core.designsystem.ThemePreviews
 import com.winenote.core.designsystem.component.WineAlertDialog
 import com.winenote.core.designsystem.component.WineTopAppbar
 import com.winenote.core.designsystem.modifier.singleClickable
 import com.winenote.core.designsystem.theme.Gray80
+import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.designsystem.theme.WineTheme
 import com.winenote.core.resource.R
 import com.winenote.core.ui.common.WineScaffold
 import com.winenote.core.ui.util.ObserveAsEvents
+import com.winenote.feature.setting.ui.SettingsThemeChooserDialog
 
 internal typealias OnSettingUiAction = (SettingUiAction) -> Unit
 
@@ -97,6 +100,13 @@ fun SettingScreen(
             onDismiss = { onUiAction(dismissAction) }
         )
     }
+
+    if (uiState.isShowThemeDialog) {
+        SettingsThemeChooserDialog(
+            currentTheme = uiState.currentThemeConfig,
+            onUiAction = onUiAction
+        )
+    }
 }
 
 @Composable
@@ -122,6 +132,18 @@ fun SettingContent(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_next),
                 contentDescription = "",
                 tint = MaterialTheme.colorScheme.onSurface
+            )
+        }
+
+        HorizontalDivider(color = Gray80, thickness = 0.5.dp)
+
+        SettingRow(
+            onClick = { onUiAction(SettingUiAction.OnShowThemeDialog(true)) }
+        ) {
+            Text(
+                text = stringResource(id = R.string.setting_theme_change),
+                style = WineTheme.typography.regular16,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -176,4 +198,15 @@ private fun SettingRow(
         verticalAlignment = Alignment.CenterVertically,
         content = content
     )
+}
+
+@ThemePreviews
+@Composable
+private fun SettingScreenPreview() {
+    WineNoteTheme {
+        SettingScreen(
+            uiState = SettingUiState.Setting(),
+            onUiAction = {}
+        )
+    }
 }

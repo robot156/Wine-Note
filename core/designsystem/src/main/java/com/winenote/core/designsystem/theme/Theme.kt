@@ -59,7 +59,6 @@ fun WineNoteTheme(
         LocalDensity provides Density(density = LocalDensity.current.density, fontScale = 1f),
         LocalTypography provides Typography,
     ) {
-
         MaterialTheme(
             colorScheme = colorScheme,
             content = content
@@ -71,4 +70,8 @@ object WineTheme {
     val typography: WineNoteTypography
         @Composable
         get() = LocalTypography.current
+
+    val isSystemInDarkTheme : Boolean
+        @Composable
+        get() = MaterialTheme.colorScheme.background == Gray90
 }

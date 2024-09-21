@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import com.winenote.core.designsystem.theme.WineNoteTheme
+import com.winenote.core.designsystem.theme.WineTheme
 
 @Composable
 fun WineBottomSheetDialog(
@@ -41,7 +42,9 @@ fun WineBottomSheetDialog(
         },
         dragHandle = dragHandle,
     ) {
-        WineNoteTheme {
+        WineNoteTheme(
+            darkTheme = WineTheme.isSystemInDarkTheme
+        ) {
             content()
         }
     }

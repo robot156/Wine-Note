@@ -31,7 +31,10 @@ fun Context.externalShareForBitmap(bitmap: Bitmap) {
 }
 
 private fun getExternalFilePath(): String {
-    return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString().plus(File.separator)
+    return Environment
+        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        .toString()
+        .plus(File.separator)
 }
 
 private fun saveImageIntoFileFromUri(bitmap: Bitmap, fileName: String, path: String): File {

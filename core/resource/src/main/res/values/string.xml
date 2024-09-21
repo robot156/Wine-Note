@@ -97,6 +97,10 @@
     <string name="setting_clear">모든 기록 지우기</string>
     <string name="setting_clear_description">현재까지 작성한 모두 기록을 제거합니다.</string>
     <string name="setting_clear_success">모든 와인 기록을 삭제하였습니다.</string>
+    <string name="setting_theme_change">테마 변경</string>
+    <string name="setting_theme_system">System</string>
+    <string name="setting_theme_dark">Dark</string>
+    <string name="setting_theme_light">Light</string>
     <!-- endregion setting -->
 
     <!-- region bin -->
