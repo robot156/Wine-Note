@@ -10,9 +10,6 @@ import com.winenote.core.data.model.asInternalModel
 import com.winenote.core.domain.usecase.record.entity.WineRecordEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
-import java.time.ZonedDateTime
-import java.util.UUID
 import javax.inject.Inject
 
 internal class WineRecordLocalDataSourceImpl @Inject constructor(
@@ -21,11 +18,15 @@ internal class WineRecordLocalDataSourceImpl @Inject constructor(
 
     override fun getWineRecords(isDelete: Boolean): Flow<PagingData<WineRecordEntity>> = Pager(
         config = PagingConfig(pageSize = 50, enablePlaceholders = false),
-        pagingSourceFactory = { if (isDelete) wineRecordDao.getWineRecordsForDeleted() else wineRecordDao.getWineRecords() }
-    ).flow.map { pagingData -> pagingData.map { it.asEntity() } }
+        pagingSourceFactory = { if (isDelete) wineRecordDao.getWineRecordsForDeletedAtFlow() else wineRecordDao.getWineRecords() }
+    ).flow.map { pagingData -> pagingData.map(WineRecord::asEntity) }
 
     override suspend fun getWineRecord(recordId: String): WineRecordEntity? {
-        return wineRecordDao.getWineRecord(recordId)?.asEntity()
+        return wineRecordDao.getWineRecordForId(recordId)?.asEntity()
+    }
+
+    override suspend fun getWineRecordForDeleted(): List<WineRecordEntity> {
+        return wineRecordDao.getWineRecordsForDeleted().map(WineRecord::asEntity)
     }
 
     override suspend fun insertWineRecord(wineRecord: WineRecordEntity) {

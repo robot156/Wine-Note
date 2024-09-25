@@ -3,12 +3,14 @@ package com.winenote.feature.winebin
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import androidx.paging.filter
 import androidx.paging.insertSeparators
 import androidx.paging.map
+import com.winenote.core.domain.data
 import com.winenote.core.domain.usecase.record.ClearBinWineRecordsUseCase
 import com.winenote.core.domain.usecase.record.DeleteWineRecordUseCase
+import com.winenote.core.domain.usecase.record.GetWineRecordForDeletedUseCase
 import com.winenote.core.domain.usecase.record.GetWineRecordsUseCase
+import com.winenote.core.domain.usecase.record.entity.WineRecordEntity
 import com.winenote.core.model.asItem
 import com.winenote.core.resource.R
 import com.winenote.core.ui.base.BaseViewModel
@@ -18,52 +20,63 @@ import com.winenote.core.ui.state.UiState
 import com.winenote.core.ui.state.checkState
 import com.winenote.core.ui.util.getDateTimeBetweenDay
 import com.winenote.core.ui.util.getStringFormatZonedDateTime
-import com.winenote.core.ui.util.getZonedDateTimeWithSyncZero
+import com.winenote.core.ui.util.getZonedDateTimeDefault
 import com.winenote.feature.winebin.model.WineBinUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 internal class WineBinViewModel @Inject constructor(
     getWineRecordsUseCase: GetWineRecordsUseCase,
+    private val getWineRecordForDeletedUseCase: GetWineRecordForDeletedUseCase,
+    private val deleteWineRecordUseCase: DeleteWineRecordUseCase,
     private val clearBinWineRecordsUseCase: ClearBinWineRecordsUseCase,
-    private val deleteWineRecordUseCase: DeleteWineRecordUseCase
 ) : BaseViewModel() {
 
     private val _wineBinUiState = MutableStateFlow<WineBinUiState>(WineBinUiState.WineBin())
     val wineBinUiState: StateFlow<WineBinUiState> = _wineBinUiState
 
-    val wineRecords = getWineRecordsUseCase(GetWineRecordsUseCase.Params(isDelete = true))
-        .mapLatest { pagingData ->
-            pagingData.filter {
-                (getStringFormatZonedDateTime(it.deletedAt).isAfter(ZonedDateTime.now()))
-                    .also { isNotDeleteItem -> if (isNotDeleteItem.not()) deletedBinWineRecord(recordId = it.id) }
-            }.map { entity ->
-                val deleteDay = getDateTimeBetweenDay(
-                    startDate = getZonedDateTimeWithSyncZero(),
-                    endDate = getStringFormatZonedDateTime(entity.deletedAt)
-                )
+    val wineRecords = loadDataSignal
+        .mapLatest {
+            val deletedRecords = getWineRecordForDeletedUseCase(Unit).data
+                ?.map(WineRecordEntity::asItem)
+                ?.filter { getStringFormatZonedDateTime(it.deletedAt).isBefore(getZonedDateTimeDefault().minusDays(1)) }
+                ?: emptyList()
 
-                WineBinUiModel.WineRecordItem(entity.asItem(), deleteDay)
+            deletedRecords.forEach {
+                deleteWineRecordUseCase(DeleteWineRecordUseCase.Params(it.id)).first()
             }
         }
-        .mapLatest { pagingData ->
-            pagingData.insertSeparators { before: WineBinUiModel?, after: WineBinUiModel? ->
-                if (before == null && after == null) {
-                    setVisibleClearBinButton(false)
-                    return@insertSeparators WineBinUiModel.EmptyItem
-                } else {
-                    setVisibleClearBinButton(true)
+        .flatMapLatest {
+            getWineRecordsUseCase(GetWineRecordsUseCase.Params(isDelete = true))
+                .mapLatest { pagingData ->
+                    pagingData.map { entity ->
+                        val deleteDay = getDateTimeBetweenDay(
+                            startDate = getZonedDateTimeDefault(),
+                            endDate = getStringFormatZonedDateTime(entity.deletedAt)
+                        )
+
+                        WineBinUiModel.WineRecordItem(entity.asItem(), deleteDay)
+                    }
                 }
-                null
-            }
+                .mapLatest { pagingData ->
+                    pagingData.insertSeparators { before: WineBinUiModel?, after: WineBinUiModel? ->
+                        if (before == null && after == null) {
+                            setVisibleClearBinButton(false)
+                            return@insertSeparators WineBinUiModel.EmptyItem
+                        } else {
+                            setVisibleClearBinButton(true)
+                        }
+                        null
+                    }
+                }
         }
         .cachedIn(viewModelScope)
 
@@ -73,12 +86,6 @@ internal class WineBinViewModel @Inject constructor(
             is WineBinUiAction.OnClickWineRecord -> setUiEvent(WineBinUiEvent.NavigateToWineDetail(uiAction.recordId))
             is WineBinUiAction.OnClickClearBin -> clearBinWineRecords()
             is WineBinUiAction.OnShowClearDialog -> showClearBinDialog(uiAction.isShow)
-        }
-    }
-
-    private fun deletedBinWineRecord(recordId: String) {
-        viewModelScope.launch {
-            deleteWineRecordUseCase(DeleteWineRecordUseCase.Params(recordId)).first()
         }
     }
 

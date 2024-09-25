@@ -21,6 +21,10 @@ internal class WineRecordRepositoryImpl @Inject constructor(
         return localDataSource.getWineRecord(recordId)
     }
 
+    override suspend fun getWineRecordForDeleted(): List<WineRecordEntity> {
+        return localDataSource.getWineRecordForDeleted()
+    }
+
     override suspend fun insertWineRecord(wineRecord: WineRecordEntity) {
         val uploadImageUrl = wineRecord.photoUrl?.let { remoteDataSource.imageUpload(it) }
         return localDataSource.insertWineRecord(wineRecord.copy(photoUrl = uploadImageUrl))

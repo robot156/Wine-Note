@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.winenote.core.route.Route
 import com.winenote.feature.setting.navigateToSetting
 import com.winenote.feature.setting.settingNavigation
 import com.winenote.feature.splash.splashNavigation
-import com.winenote.feature.splash.splashRoute
 import com.winenote.feature.winebin.navigateToWineBin
 import com.winenote.feature.winebin.wineBinNavigation
 import com.winenote.feature.winedetail.navigateToWineDetail
@@ -23,7 +23,7 @@ import com.winenote.feature.winewrite.wineWriteNavigation
 @Composable
 fun WineNoteNavHost(
     modifier: Modifier = Modifier,
-    startDestination: String = splashRoute,
+    startDestination: Route = Route.Splash,
 ) {
     val navController = rememberNavController()
 

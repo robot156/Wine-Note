@@ -10,6 +10,8 @@ internal interface WineRecordLocalDataSource {
 
     suspend fun getWineRecord(recordId: String): WineRecordEntity?
 
+    suspend fun getWineRecordForDeleted(): List<WineRecordEntity>
+
     suspend fun insertWineRecord(wineRecord: WineRecordEntity)
 
     suspend fun updateWineRecord(wineRecord: WineRecordEntity)

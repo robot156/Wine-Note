@@ -4,14 +4,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-
-const val wineBinRoute = "wine_bin_route"
+import com.winenote.core.route.Route
 
 fun NavGraphBuilder.wineBinNavigation(
     navigateToBack: () -> Unit,
     navigateToWineDetail: (String) -> Unit
 ) {
-    composable(wineBinRoute) {
+    composable<Route.WineBin> {
         WineBinRoute(
             navigateToBack = navigateToBack,
             navigateToWineDetail = navigateToWineDetail
@@ -20,5 +19,5 @@ fun NavGraphBuilder.wineBinNavigation(
 }
 
 fun NavController.navigateToWineBin(navOptions: NavOptions? = null) {
-    this.navigate(wineBinRoute, navOptions)
+    this.navigate(Route.WineBin, navOptions)
 }

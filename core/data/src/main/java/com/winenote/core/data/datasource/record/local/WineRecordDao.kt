@@ -2,7 +2,6 @@ package com.winenote.core.data.datasource.record.local
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -16,10 +15,13 @@ internal interface WineRecordDao {
     fun getWineRecords(): PagingSource<Int, WineRecord>
 
     @Query("SELECT * FROM WineRecord WHERE isDelete = 1 ORDER BY deletedAt desc")
-    fun getWineRecordsForDeleted(): PagingSource<Int, WineRecord>
+    fun getWineRecordsForDeletedAtFlow(): PagingSource<Int, WineRecord>
+
+    @Query("SELECT * FROM WineRecord WHERE isDelete = 1 ORDER BY deletedAt desc")
+    suspend fun getWineRecordsForDeleted(): List<WineRecord>
 
     @Query("SELECT * FROM WineRecord WHERE id is NULL OR id = :recordId")
-    suspend fun getWineRecord(recordId: String): WineRecord?
+    suspend fun getWineRecordForId(recordId: String): WineRecord?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWineRecord(wineRecord: WineRecord)

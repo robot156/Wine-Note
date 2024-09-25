@@ -4,13 +4,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-
-const val splashRoute = "splash_route"
+import com.winenote.core.route.Route
 
 fun NavGraphBuilder.splashNavigation(
     navigateToWineList: (NavOptions) -> Unit
 ) {
-    composable(splashRoute) {
+    composable<Route.Splash> {
         SplashRoute(
             navigateToWineList = navigateToWineList
         )
@@ -18,5 +17,5 @@ fun NavGraphBuilder.splashNavigation(
 }
 
 fun NavController.navigateToSplash(navOptions: NavOptions? = null) {
-    this.navigate(splashRoute, navOptions)
+    this.navigate(Route.Splash, navOptions)
 }

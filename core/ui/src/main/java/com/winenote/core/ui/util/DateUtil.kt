@@ -25,7 +25,7 @@ fun getLongFormatZonedDateTime(epochMilli: Long): ZonedDateTime {
     return ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), ZoneId.systemDefault())
 }
 
-fun getZonedDateTimeWithSyncZero(zonedDateTime: ZonedDateTime = ZonedDateTime.now()): ZonedDateTime {
+fun getZonedDateTimeDefault(zonedDateTime: ZonedDateTime = ZonedDateTime.now()): ZonedDateTime {
     return zonedDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0)
 }
 

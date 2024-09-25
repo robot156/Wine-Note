@@ -1,52 +1,38 @@
 package com.winenote.core.ui.util
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.os.Environment
+import android.graphics.Bitmap.CompressFormat.PNG
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 
-fun Context.externalShareForBitmap(bitmap: Bitmap) {
+fun Context.externalShareForBitmap(bitmap: ImageBitmap) {
     try {
-        val imagePath = File(getExternalFilesDir(null)?.absolutePath + "/ShareImgFolder")
-        imagePath.mkdirs()
+        val file = File(bitmap.saveToDisk(this))
+        val uri = FileProvider.getUriForFile(this, "$packageName.provider", file)
 
-        val shareIntent = Intent().apply {
-            val file = saveImageIntoFileFromUri(bitmap, "img_${System.currentTimeMillis()}.jpg", getExternalFilePath())
-            val photoUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", file)
-
-            action = Intent.ACTION_SEND
-            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            type = "image/*"
-            putExtra(Intent.EXTRA_STREAM, photoUri)
-        }
-
-        startActivity(Intent.createChooser(shareIntent, ""))
+        ShareCompat.IntentBuilder(this)
+            .setStream(uri)
+            .setType("image/png")
+            .startChooser()
     } catch (e: Exception) {
         Timber.e("[externalShareFoBitmap] message: ${e.message}")
     }
 }
 
-private fun getExternalFilePath(): String {
-    return Environment
-        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-        .toString()
-        .plus(File.separator)
-}
+private fun ImageBitmap.saveToDisk(context: Context): String {
+    val fileName = "shared_image_${System.currentTimeMillis()}.png"
+    val cachePath = File(context.cacheDir, "images").also { it.mkdirs() }
+    val file = File(cachePath, fileName)
+    val outputStream = FileOutputStream(file)
 
-private fun saveImageIntoFileFromUri(bitmap: Bitmap, fileName: String, path: String): File {
-    val file = File(path, fileName)
-    try {
-        val fileOutputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-        fileOutputStream.flush()
-        fileOutputStream.close()
-    } catch (e: Exception) {
-        Timber.e("[saveImageIntoFileFromUri] message: ${e.message}")
-    }
+    asAndroidBitmap().compress(PNG, 100, outputStream)
+    outputStream.flush()
+    outputStream.close()
 
-    return file
+    return file.absolutePath
 }

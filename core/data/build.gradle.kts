@@ -3,7 +3,8 @@ import com.winenote.convention.WineNoteConfig
 plugins {
     alias(libs.plugins.winenote.android.library)
     alias(libs.plugins.winenote.android.hilt)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -28,14 +29,13 @@ dependencies {
     // Kotlin
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlinx.serialization.json)
 
-    // Moshi
-    implementation(libs.moshi.core)
-    implementation(libs.moshi.adapter)
-    ksp(libs.moshi.codegen)
-
+    // firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.storage)
+
+    // image compress
     implementation(libs.compressor)
 
     // Log tracker

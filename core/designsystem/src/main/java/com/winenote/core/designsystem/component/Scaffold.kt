@@ -1,4 +1,4 @@
-package com.winenote.core.ui.common
+package com.winenote.core.designsystem.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues

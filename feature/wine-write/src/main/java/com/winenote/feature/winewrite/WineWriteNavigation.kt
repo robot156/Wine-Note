@@ -4,30 +4,18 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-
-const val wineWriteRoute = "wine_write_route"
-internal const val writeArgs = "writeArgs"
+import com.winenote.core.route.Route
 
 internal class WriteArgs(val recordId: String? = null) {
-    constructor(savedStateHandle: SavedStateHandle) : this(savedStateHandle[writeArgs])
+    constructor(savedStateHandle: SavedStateHandle) : this(savedStateHandle["recordId"])
 }
 
 fun NavGraphBuilder.wineWriteNavigation(
     navigateToWineDetail: (String, NavOptions) -> Unit,
     navigateToBack: () -> Unit
 ) {
-    composable(
-        route = wineWriteRoute.plus("/").plus("{${writeArgs}}"),
-        arguments = listOf(
-            navArgument(writeArgs) {
-                type = NavType.StringType
-                nullable = true
-            }
-        )
-    ) {
+    composable<Route.WineWrite> {
         WineWriteRoute(
             navigateToWineDetail = navigateToWineDetail,
             navigateToBack = navigateToBack
@@ -36,5 +24,5 @@ fun NavGraphBuilder.wineWriteNavigation(
 }
 
 fun NavController.navigateToWineWrite(recordId: String? = null, navOptions: NavOptions? = null) {
-    navigate(wineWriteRoute.plus("/").plus(recordId), navOptions)
+    navigate(Route.WineWrite(recordId), navOptions)
 }

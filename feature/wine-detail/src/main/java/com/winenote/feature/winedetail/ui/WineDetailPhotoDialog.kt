@@ -24,11 +24,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.winenote.core.designsystem.component.WineDialog
+import com.winenote.core.designsystem.component.WineScaffold
 import com.winenote.core.designsystem.component.WineTopAppbar
 import com.winenote.core.designsystem.theme.Black90
 import com.winenote.core.designsystem.theme.White90
 import com.winenote.core.resource.R
-import com.winenote.core.ui.common.WineScaffold
 import com.winenote.feature.winedetail.OnWineDetailUiAction
 import com.winenote.feature.winedetail.WineDetailUiAction
 

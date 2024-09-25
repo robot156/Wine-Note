@@ -21,10 +21,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavOptions
 import com.winenote.core.designsystem.ThemePreviews
+import com.winenote.core.designsystem.component.WineScaffold
 import com.winenote.core.designsystem.theme.WineNoteTheme
+import com.winenote.core.route.Route
 import com.winenote.core.ui.common.EmptyScreen
 import com.winenote.core.ui.common.LoadingDialog
-import com.winenote.core.ui.common.WineScaffold
 import com.winenote.core.ui.util.ObserveAsEvents
 import com.winenote.core.ui.util.getDateFormatLongTime
 import com.winenote.feature.winewrite.state.WriteScreenState
@@ -36,7 +37,6 @@ import com.winenote.feature.winewrite.ui.step.WineInfoScreen
 import com.winenote.feature.winewrite.ui.step.WineTasteScreen
 import com.winenote.feature.winewrite.ui.step.WineTotalScreen
 import com.winenote.feature.winewrite.util.getTransitionDirection
-import timber.log.Timber
 
 internal typealias OnWineWriteUiAction = (WineWriteUiAction) -> Unit
 
@@ -48,7 +48,7 @@ internal fun WineWriteRoute(
 ) {
     val context = LocalContext.current
     val navOptions = NavOptions.Builder()
-        .setPopUpTo("wine_list_route", inclusive = false)
+        .setPopUpTo(Route.WineList, inclusive = false)
         .build()
 
     val wineWriteUiState by viewModel.wineWriteUiState.collectAsStateWithLifecycle()

@@ -17,10 +17,10 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.winenote.core.designsystem.ThemePreviews
 import com.winenote.core.designsystem.component.WineFloatingButton
+import com.winenote.core.designsystem.component.WineScaffold
 import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.model.WineRecord
 import com.winenote.core.resource.R
-import com.winenote.core.ui.common.WineScaffold
 import com.winenote.core.ui.util.ObserveAsEvents
 import com.winenote.feature.winelist.model.WineListUiModel
 import com.winenote.feature.winelist.ui.WineListContent

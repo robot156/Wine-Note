@@ -7,24 +7,25 @@ firebaseCrashlyticsGradlePlugin = "3.0.2"
 
 # AndroidX
 androidxCore = "1.13.1"
-androidxComposeBom = "2024.09.01"
-androidxStartUp = "1.1.1"
-androidxLifecycle = "2.8.5"
+androidxComposeBom = "2024.09.02"
+androidxStartUp = "1.2.0"
+androidxLifecycle = "2.8.6"
 androidxHilt = "1.2.0"
 androidxComposeCompiler = "1.5.15"
 androidxCoreSplashScreen = "1.0.1"
 androidxActivity = "1.9.2"
-androidxNavigation = "2.8.0"
+androidxNavigation = "2.8.1"
 androidxDataStore = "1.1.1"
 androidxRoom = "2.6.1"
 androidxAppcompat = "1.7.0"
 androidxPaging = "3.3.2"
 
 # Kotlin
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 kotlinxCoroutines = "1.8.1"
 kotlinxCollectionsImmutable = "0.3.7"
-ksp = "2.0.0-1.0.21"
+kotlinxSerializationJson = "1.7.1"
+ksp = "2.0.20-1.0.24"
 
 # Firebase
 firebaseBom = "33.3.0"
@@ -44,7 +45,6 @@ androidx-test-ext-junit = "1.2.1"
 espresso-core = "3.6.1"
 
 # ETC
-moshi = "1.15.1"
 lottie = "6.1.0"
 timber = "5.0.1"
 leakCanary = "2.9.1"
@@ -85,11 +85,9 @@ androidx-room-coroutine = { group = "androidx.room", name = "room-ktx", version.
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "androidxRoom" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" } # For Kotlin use Ksp instead of annotationProcessor
 
-# Androidx Paging
+# AndroidX Paging
 androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "androidxPaging" }
 androidx-paging-common = { group = "androidx.paging", name = "paging-common-ktx", version.ref = "androidxPaging" }
-
-# Androidx Paging Compose
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPaging" }
 
 # AndroidX Navigation
@@ -118,6 +116,7 @@ android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 # Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" } # For platform
@@ -125,14 +124,11 @@ firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 
 # Coil
-coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil"}
-coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil"}
-coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil"}
+coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+coil-kt-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
 
 # ETC
-moshi-adapter = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
-moshi-core = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
-moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" } # For Kotlin use Ksp instead of annotationProcessor
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 compose-stable-marker = { group = "com.github.skydoves", name = "compose-stable-marker", version.ref = "composeStableMarker" }
@@ -146,6 +142,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 
 [bundles]
 androidx-room = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-room-paging"]
+androidx-paging = ["androidx-paging-runtime", "androidx-paging-common", "androidx-paging-compose"]
 androidx-lifecycle = ["androidx-lifecycle-runtime-compose", "androidx-lifecycle-viewModel-compose", "androidx-lifecycle-savedState"]
 coil = ["coil-kt", "coil-kt-compose", "coil-kt-svg"]
 
@@ -158,6 +155,7 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 # ETC Plugin
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

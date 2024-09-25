@@ -32,6 +32,7 @@ import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.designsystem.theme.WineTheme
 import com.winenote.core.designsystem.theme.Yellow
 import com.winenote.core.resource.R
+import com.winenote.core.route.Route
 
 @Composable
 internal fun SplashRoute(
@@ -40,7 +41,7 @@ internal fun SplashRoute(
 ) {
     val uiState by splashViewModel.uiState.collectAsStateWithLifecycle()
     val options = NavOptions.Builder()
-        .setPopUpTo(splashRoute, inclusive = true)
+        .setPopUpTo(Route.Splash, inclusive = true)
         .build()
 
     when(uiState) {

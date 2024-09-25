@@ -4,14 +4,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-
-const val settingRoute = "setting_route"
+import com.winenote.core.route.Route
 
 fun NavGraphBuilder.settingNavigation(
     navigateToBinRecord: () -> Unit,
     navigateToBack: () -> Unit
 ) {
-    composable(settingRoute) {
+    composable<Route.Setting> {
         SettingRoute(
             navigateToBinRecord = navigateToBinRecord,
             navigateToBack = navigateToBack
@@ -20,5 +19,5 @@ fun NavGraphBuilder.settingNavigation(
 }
 
 fun NavController.navigateToSetting(navOptions: NavOptions? = null) {
-    this.navigate(settingRoute, navOptions)
+    this.navigate(Route.Setting, navOptions)
 }
