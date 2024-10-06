@@ -1,3 +1,4 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     alias(libs.plugins.winenote.android.application)
@@ -8,11 +9,30 @@ plugins {
 }
 
 android {
+    val localProperties = gradleLocalProperties(rootDir, providers)
+
     namespace = "com.winenote"
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("wineKey.keystore")
+            storePassword = localProperties["STORE_PASSWORD"].toString()
+            keyAlias = localProperties["KEY_ALIAS"].toString()
+            keyPassword = localProperties["KEY_PASSWORD"].toString()
+        }
+    }
+
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+        }
+
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

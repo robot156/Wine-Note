@@ -2,8 +2,10 @@ package com.winenote.convention
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureAndroidCompose(
@@ -21,6 +23,11 @@ internal fun Project.configureAndroidCompose(
         dependencies {
             implementation(platform(libs.androidx.compose.bom))
             implementation(libs.androidx.compose.runtime)
+        }
+
+        configure<ComposeCompilerGradlePluginExtension> {
+            includeSourceInformation.set(true)
+            stabilityConfigurationFile.set(project.rootDir.resolve("compose-stability.conf"))
         }
     }
 
