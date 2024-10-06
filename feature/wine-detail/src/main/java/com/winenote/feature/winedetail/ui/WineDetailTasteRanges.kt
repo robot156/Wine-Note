@@ -17,12 +17,15 @@ import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.designsystem.theme.WineTheme
 import com.winenote.core.model.WineRecord
 import com.winenote.core.resource.R
+import com.winenote.core.ui.util.getWineBottleColor
 
 @Composable
 fun WineDetailTasteRanges(
     modifier: Modifier = Modifier,
     wineRecord: WineRecord,
 ) {
+    val wineColor = getWineBottleColor(wineRecord.color)
+
     Column(modifier = modifier) {
         Text(
             text = stringResource(id = R.string.detail_taste),
@@ -33,6 +36,7 @@ fun WineDetailTasteRanges(
         Spacer(modifier = Modifier.height(16.dp))
 
         TasteRange(
+            wineColor = wineColor,
             tasteText = stringResource(id = R.string.write_body),
             fillValue = wineRecord.body.toInt()
         )
@@ -40,12 +44,14 @@ fun WineDetailTasteRanges(
         Spacer(modifier = Modifier.height(26.dp))
 
         TasteRange(
+            wineColor = wineColor,
             tasteText = stringResource(id = R.string.write_tannin),
             fillValue = wineRecord.tannin.toInt()
         )
         Spacer(modifier = Modifier.height(26.dp))
 
         TasteRange(
+            wineColor = wineColor,
             tasteText = stringResource(id = R.string.write_sugar_content),
             fillValue = wineRecord.sugarContent.toInt()
         )
@@ -53,6 +59,7 @@ fun WineDetailTasteRanges(
         Spacer(modifier = Modifier.height(26.dp))
 
         TasteRange(
+            wineColor = wineColor,
             tasteText = stringResource(id = R.string.write_acidity),
             fillValue = wineRecord.acidity.toInt()
         )

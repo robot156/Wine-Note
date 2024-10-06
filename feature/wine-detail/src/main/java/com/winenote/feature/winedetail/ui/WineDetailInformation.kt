@@ -22,16 +22,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.winenote.core.designsystem.ThemePreviews
-import com.winenote.core.designsystem.theme.DessertWine
-import com.winenote.core.designsystem.theme.RedWine
-import com.winenote.core.designsystem.theme.RoseWine
-import com.winenote.core.designsystem.theme.SparklingWine
-import com.winenote.core.designsystem.theme.WhiteWine
 import com.winenote.core.designsystem.theme.WineNoteTheme
 import com.winenote.core.designsystem.theme.WineTheme
-import com.winenote.core.model.WineColor
 import com.winenote.core.model.WineRecord
 import com.winenote.core.resource.R
+import com.winenote.core.ui.util.getWineBottleColor
 
 @Composable
 fun WineDetailInformation(
@@ -57,13 +52,7 @@ fun WineDetailInformation(
                 modifier = Modifier.size(width = 14.dp, height = 56.dp),
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_wine_bottle),
                 contentDescription = "",
-                tint = when (wineRecord.color) {
-                    WineColor.Red -> RedWine
-                    WineColor.Rose -> RoseWine
-                    WineColor.White -> WhiteWine
-                    WineColor.Dessert -> DessertWine
-                    WineColor.Sparkling -> SparklingWine
-                }
+                tint = getWineBottleColor(wineRecord.color)
             )
 
             Spacer(modifier = Modifier.width(12.dp))
