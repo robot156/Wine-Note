@@ -13,6 +13,7 @@ open class WineNoteApplication : Application(), ImageLoaderFactory {
         return ImageLoader.Builder(this)
             .components { add(SvgDecoder.Factory()) }
             .crossfade(true)
+            .crossfade(600)
             .build()
     }
 }

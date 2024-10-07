@@ -1,20 +1,19 @@
 [versions]
 # Project
-androidGradlePlugin = "8.5.2"
+androidGradlePlugin = "8.7.0"
 
 playservicesGradlePlugin = "4.4.2"
 firebaseCrashlyticsGradlePlugin = "3.0.2"
 
 # AndroidX
 androidxCore = "1.13.1"
-androidxComposeBom = "2024.09.02"
+androidxComposeBom = "2024.09.03"
 androidxStartUp = "1.2.0"
 androidxLifecycle = "2.8.6"
 androidxHilt = "1.2.0"
-androidxComposeCompiler = "1.5.15"
 androidxCoreSplashScreen = "1.0.1"
 androidxActivity = "1.9.2"
-androidxNavigation = "2.8.1"
+androidxNavigation = "2.8.2"
 androidxDataStore = "1.1.1"
 androidxRoom = "2.6.1"
 androidxAppcompat = "1.7.0"
@@ -22,19 +21,19 @@ androidxPaging = "3.3.2"
 
 # Kotlin
 kotlin = "2.0.20"
-kotlinxCoroutines = "1.8.1"
-kotlinxCollectionsImmutable = "0.3.7"
+kotlinxCoroutines = "1.9.0"
+kotlinxCollectionsImmutable = "0.3.8"
 kotlinxSerializationJson = "1.7.1"
-ksp = "2.0.20-1.0.24"
+ksp = "2.0.20-1.0.25"
 
 # Firebase
 firebaseBom = "33.3.0"
 
 # hilt
-hilt = "2.51.1"
+hilt = "2.52"
 
 # Coil
-coil = "2.6.0"
+coil = "2.7.0"
 
 # coreDseugar
 androidDesugarJdkLibs = "2.1.2"

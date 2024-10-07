@@ -12,22 +12,14 @@ internal fun Project.configureAndroidCompose(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
-        buildFeatures {
-            compose = true
-        }
-
-        composeOptions {
-            kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
+        configure<ComposeCompilerGradlePluginExtension> {
+            includeSourceInformation.set(true)
+            stabilityConfigurationFile.set(project.rootDir.resolve("compose-stability.conf"))
         }
 
         dependencies {
             implementation(platform(libs.androidx.compose.bom))
             implementation(libs.androidx.compose.runtime)
-        }
-
-        configure<ComposeCompilerGradlePluginExtension> {
-            includeSourceInformation.set(true)
-            stabilityConfigurationFile.set(project.rootDir.resolve("compose-stability.conf"))
         }
     }
 
